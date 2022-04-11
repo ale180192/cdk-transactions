@@ -1,0 +1,6 @@
+
+import enum
+
+class ErrorCode(enum.Enum):
+    NOT_FOUND = "NOT FOUND"
+    USER_TEMPORARY_DEACTIVATED = "USER_TEMPORARY_DEACTIVATED"
