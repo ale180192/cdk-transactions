@@ -18,6 +18,6 @@ from django.urls import path, include
 urlpatterns = [
     path(
         'api/transactions/v1/',
-        include(('transactions.urls', 'transactions'), namespace='transactions')
+        include(('transact.urls', 'transact'), namespace='transact')
     ),
 ]

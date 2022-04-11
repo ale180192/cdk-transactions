@@ -63,3 +63,10 @@ make sure to set the correct env with before does the deploy
 export ENV_FOR_DYNACONF=default
 cdk deploy
 ```
+
+
+### Django project run
+```bash
+cd transactions_backend
+docker-compose up
+```
