@@ -12,6 +12,5 @@ COPY tests/ /tests/
 
 WORKDIR /src
 ENV DJANGO_SETTINGS_MODULE=djangoapp.app.settings
-CMD python /tests/wait_for_postgres.py && \
-    python /src/djangoapp/manage.py migrate && \
+CMD python /src/djangoapp/manage.py migrate && \
     python /src/djangoapp/manage.py runserver 0.0.0.0:80
