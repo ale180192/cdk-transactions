@@ -28,11 +28,11 @@ class CdkTransactionsStack(Stack):
         ecs_patterns.ApplicationLoadBalancedFargateService(self, settings.get_id("FargateService"),
             cluster=cluster,
             cpu=512,
-            desired_count=6,
+            desired_count=2,
             task_image_options=ecs_patterns.ApplicationLoadBalancedTaskImageOptions(
                 image=ecs.ContainerImage.from_docker_image_asset(asset=asset)
             ),
-            memory_limit_mib=2048,
+            memory_limit_mib=1024,
             public_load_balancer=True
         )
         
