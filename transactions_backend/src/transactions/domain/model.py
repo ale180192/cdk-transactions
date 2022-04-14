@@ -1,19 +1,28 @@
 from datetime import datetime
 from enum import Enum
+from pydantic import UUID4
 
+from pydantic import BaseModel
 
-class Company:
+class NotFoundException(Exception):
+    pass
+
+class Company(BaseModel):
+    id: UUID4
+    name: str
     
-    def __init__(self, id, name, status):
-        self.id = id
-        self.name = name
-        self.status = status
+    class Config:
+        orm_mode = True
 
-    def some_business_rule(self):
-        pass
-
-class Transaction:
-
+class Transaction(BaseModel):
+    id: UUID4
+    company: Company
+    price: int
+    created_at: datetime
+    status: str
+    approved: bool
+    class Config:
+        orm_mode = True
     class StatusEnum(Enum):
         CLOSED = "CLOSED"
         REVERSED = "REVERSED"
@@ -21,14 +30,14 @@ class Transaction:
 
     def __init__(self,
         id: str,
-        company_id: str,
+        company: Company,
         price: int,
         created_at: datetime,
         status: StatusEnum,
         approved: bool,
     ):
         self.id = id
-        self.company_id = company_id
+        self.company = company
         self.price = price
         self.created_at = created_at
         self.status = status

@@ -1,16 +1,51 @@
 
-# Welcome to your CDK Python project!
 
-This is a blank project for Python development with CDK.
+# Testing endpoints
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+We create the virtual env, we install dependencies and run the local server at port 80
+```
+# on Mac/linux
+cd transactions_backend
+python3 venv .env
+pip install -r requirements.tx
+source .venv/bin/activate
+cd src
+PYTHONPATH=. python djangoapp/manage.py runserver 0.0.0.0:80
+```
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+### GET api/transactions/v1/companies
+```
+curl --location --request GET 'http://localhost:80/api/transactions/v1/companies/aa8c217b320849e38ac0b02c57209ca8'
+```
+
+### GET api/transactions/v1/companies
+```
+curl --location --request GET 'http://localhost:80/api/transactions/v1/summary'
+```
+
+
+# Django Project
+
+
+### Django project run local - best way!!
+
+```bash
+cd transactions_backend/src
+PYTHONPATH=. python djangoapp/manage.py runserver 0.0.0.0:80
+```
+
+### Django project run with docker compose
+```bash
+cd transactions_backend
+docker-compose up
+```
+
+### Utils Django commands
+PYTHONPATH=. python djangoapp/manage.py makemigrations --name load_csv_to_database transact --empty
+PYTHONPATH=. python djangoapp/manage.py migrate transact 0001_initial
+PYTHONPATH=. python djangoapp/manage.py flush --noinput
+
+# AWS CDK - Infraestructure
 
 To manually create a virtualenv on MacOS and Linux:
 
@@ -24,14 +59,6 @@ step to activate your virtualenv.
 ```
 $ source .venv/bin/activate
 ```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
 
 ```
 $ pip install -r requirements.txt
@@ -55,18 +82,9 @@ command.
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
 
-Enjoy!
-
 ### Deploy
 make sure to set the correct env with before does the deploy
 ```bash
 export ENV_FOR_DYNACONF=default
 cdk deploy
-```
-
-
-### Django project run
-```bash
-cd transactions_backend
-docker-compose up
 ```

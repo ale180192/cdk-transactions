@@ -1,7 +1,7 @@
 [default]
 ENV = "dev"
 PROJECT_NAME = "transactions"
-ACCOUNT = "set"
+ACCOUNT = "554791946521"
 REGION = "us-east-1"
 
 [staging]
